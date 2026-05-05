@@ -1,26 +1,89 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: #1a0a08;
+  --color-surface: #2a1208;
+  --color-surface2: #3a1a0e;
+  --color-text: #f0e8e0;
+  --color-muted: #c8b8a8;
+  --color-accent: #d4c5b5;
+  --color-gold: #c9a96e;
+  --color-border: rgba(255, 255, 255, 0.1);
+
+  --font-serif: var(--font-cormorant);
+  --font-script: var(--font-dancing);
+  --font-sans: var(--font-montserrat);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #1a0a08;
+  color: #f0e8e0;
+  font-family: var(--font-montserrat), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Mobile-first max-width container */
+.invitation-wrapper {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Section divider */
+.section-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d4c5b5, transparent);
+  margin: 0 auto;
+}
+
+/* Aged paper card */
+.paper-card {
+  background: linear-gradient(135deg, #f5ede0, #ede3d4);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.paper-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Polaroid frame */
+.polaroid {
+  background: white;
+  padding: 10px 10px 32px 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #1a0a08;
+}
+::-webkit-scrollbar-thumb {
+  background: #3a1a0e;
+  border-radius: 2px;
 }
