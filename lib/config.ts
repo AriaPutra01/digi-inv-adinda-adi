@@ -40,7 +40,6 @@ export const weddingConfig = {
     "For as long as the sun sets and the moon rises,",
     "it is you that I want in all of my tomorrows.",
   ],
-  dressCode: "We kindly encourage our guests to wear your best & comfiest outfit.",
   music: {
     url: "/music.mp3",
     autoplay: false,
