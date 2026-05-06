@@ -36,10 +36,6 @@ export const weddingConfig = {
     "Mengikat bukan hanya perasaan, tetapi juga tanggung jawab dalam sebuah janji suci pernikahan.",
     "Semoga langkah ini menjadi awal ibadah panjang, yang tidak hanya menyatukan kami di dunia, tetapi juga kelak di akhirat dalam ridha Allah SWT.",
   ],
-  poem: [
-    "For as long as the sun sets and the moon rises,",
-    "it is you that I want in all of my tomorrows.",
-  ],
   music: {
     url: "/music.mp3",
     autoplay: false,
