@@ -1,3 +1,4 @@
+import Cover from "@/components/Cover";
 import Hero from "@/components/Hero";
 import GettingMarried from "@/components/GettingMarried";
 import ArRumSection from "@/components/ArRumSection";
@@ -12,12 +13,11 @@ import Closing from "@/components/Closing";
 import DressCode from "@/components/DressCode";
 import FloatingNav from "@/components/FloatingNav";
 
-import LoadingScreen from "@/components/LoadingScreen";
 
 export default function Home() {
   return (
     <main className="invitation-wrapper flex flex-col w-full relative">
-      <LoadingScreen />
+      <Cover />
       <Hero />
       <GettingMarried />
       <ArRumSection />
