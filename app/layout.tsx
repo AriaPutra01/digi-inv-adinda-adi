@@ -37,6 +37,11 @@ export const metadata: Metadata = {
     description: "Minggu, 28 Juni 2026 · Mega Regency, Bekasi",
     type: "website",
   },
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
