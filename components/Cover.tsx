@@ -101,12 +101,15 @@ function CoverContent() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.2, duration: 1 }}
-                onClick={() => setIsOpen(true)}
+                onClick={() => {
+                  setIsOpen(true);
+                  window.dispatchEvent(new CustomEvent("play-music"));
+                }}
                 style={{
-                  padding: "5px 12px",
+                  padding: "10px 20px",
                 }}
                 className="flex items-center gap-2 bg-[#1b3d2b] hover:bg-[#153022] text-white rounded-xl border border-white/80 shadow-lg transition-all duration-300 font-sans text-sm md:text-base">
-                <Mail />
+                <Mail size={18} />
                 Buka Undangan
               </motion.button>
             </div>

@@ -1,165 +1,111 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 import { weddingConfig } from "@/lib/config";
 
-/* ── Botanical/Floral Motif Overlay ── */
-function FloralMotif() {
-  const flowers = [
-    { top: "5%", left: "5%", size: "300px", rotate: "-15deg" },
-    { top: "15%", left: "60%", size: "250px", rotate: "20deg" },
-    { top: "40%", left: "-10%", size: "350px", rotate: "10deg" },
-    { top: "35%", left: "70%", size: "280px", rotate: "-25deg" },
-    { top: "65%", left: "20%", size: "320px", rotate: "45deg" },
-    { top: "80%", left: "65%", size: "260px", rotate: "-10deg" },
-    { top: "55%", left: "45%", size: "220px", rotate: "160deg" },
-  ];
-
-  return (
-    <div className="absolute inset-0 w-full h-full opacity-[0.12] pointer-events-none overflow-hidden">
-      {flowers.map((flower, index) => (
-        <div
-          key={index}
-          className="absolute"
-          style={{
-            top: flower.top,
-            left: flower.left,
-            width: flower.size,
-            height: flower.size,
-            rotate: flower.rotate,
-          }}>
-          <Image
-            src="/lineart.png"
-            alt={`Flower Motif ${index}`}
-            fill
-            className="object-contain"
-          />
-        </div>
-      ))}
-    </div>
-  );
-}
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.5 },
-  },
-} as const;
-
-const letterVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1, ease: [0.22, 1, 0.36, 1] },
-  },
-} as const;
-
 export default function Hero() {
-  const { bride, groom } = weddingConfig;
+  const { bride, groom, photos, akad } = weddingConfig;
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
 
-  // Split names into characters for staggered layout
-  const brideLetters = bride.name.toUpperCase().split("");
-  const groomLetters = groom.name.toUpperCase().split("");
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPhotoIndex((prev) => (prev + 1) % photos.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [photos.length]);
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#1a0a08]">
-      {/* Background Motif */}
-      <FloralMotif />
+      className="relative min-h-screen flex flex-col items-end justify-center overflow-hidden pr-8 md:pr-16">
+      {/* Background Slideshow */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentPhotoIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2 }}
+            className="absolute inset-0">
+            <Image
+              src={photos[currentPhotoIndex]}
+              alt="Wedding Background"
+              fill
+              className="object-cover"
+              priority
+            />
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-black/40" />
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
-      {/* Scattered Letters Container */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 flex flex-col items-center select-none">
-        {/* Bride Name Layout */}
-        <div className="grid grid-cols-2 gap-x-12 gap-y-8 mb-4">
-          {/* A D */}
-          <motion.span
-            variants={letterVariants}
-            className="text-5xl md:text-7xl font-serif text-[#f0e8e0] translate-x-[-10px]">
-            {brideLetters[0]}
-          </motion.span>
-          <motion.span
-            variants={letterVariants}
-            className="text-5xl md:text-7xl font-serif text-[#f0e8e0] translate-x-[20px] translate-y-[10px]">
-            {brideLetters[1]}
-          </motion.span>
+      {/* Content Layout - Right Aligned */}
+      <div
+        className="relative z-10 text-right text-white max-w-xs md:max-w-md"
+        style={{ padding: "0px 20px" }}>
+        <motion.p
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-lg md:text-xl font-serif mb-2">
+          The Wedding Of
+        </motion.p>
 
-          {/* I N */}
-          <motion.span
-            variants={letterVariants}
-            className="text-5xl md:text-7xl font-serif text-[#f0e8e0] translate-x-[30px] translate-y-[-5px]">
-            {brideLetters[2]}
-          </motion.span>
-          <motion.span
-            variants={letterVariants}
-            className="text-5xl md:text-7xl font-serif text-[#f0e8e0] translate-x-[-5px] translate-y-[20px]">
-            {brideLetters[3]}
-          </motion.span>
+        <motion.h1
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-5xl md:text-7xl font-serif leading-none mb-2">
+          {bride.name}
+        </motion.h1>
 
-          {/* D A */}
-          <motion.span
-            variants={letterVariants}
-            className="text-5xl md:text-7xl font-serif text-[#f0e8e0] translate-x-[-25px] translate-y-[10px]">
-            {brideLetters[4]}
-          </motion.span>
-          <motion.span
-            variants={letterVariants}
-            className="text-5xl md:text-7xl font-serif text-[#f0e8e0] translate-x-[15px] translate-y-[-10px]">
-            {brideLetters[5]}
-          </motion.span>
-        </div>
+        <motion.h1
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="text-5xl md:text-7xl font-serif leading-none mb-6">
+          {groom.name}
+        </motion.h1>
 
-        {/* Ampersand */}
-        <motion.div
-          variants={letterVariants}
-          className="text-4xl md:text-5xl font-script text-[#c9a96e] my-4">
-          &
-        </motion.div>
+        <motion.p
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="text-lg md:text-xl font-serif italic">
+          {akad.date}
+        </motion.p>
+      </div>
 
-        {/* Groom Name Layout */}
-        <div className="grid grid-cols-2 gap-x-16 gap-y-6">
-          {/* A D */}
-          <motion.span
-            variants={letterVariants}
-            className="text-5xl md:text-7xl font-serif text-[#f0e8e0] translate-x-[10px]">
-            {groomLetters[0]}
-          </motion.span>
-          <motion.span
-            variants={letterVariants}
-            className="text-5xl md:text-7xl font-serif text-[#f0e8e0] translate-x-[-20px] translate-y-[15px]">
-            {groomLetters[1]}
-          </motion.span>
+      {/* Layered White Frame at Bottom */}
+      <div className="absolute bottom-0 left-0 w-full z-20 pointer-events-none drop-shadow-[0_-5px_15px_rgba(0,0,0,0.1)]">
+        {/* Layer 1  */}
+        <svg
+          className="absolute bottom-0 w-full h-40 opacity-20 translate-y-2"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none">
+          <path fill="white" d="M0,12L1440,40L1440,120L0,120Z"></path>
+        </svg>
 
-          {/* I */}
-          <div className="col-span-2 flex justify-center">
-            <motion.span
-              variants={letterVariants}
-              className="text-5xl md:text-7xl font-serif text-[#f0e8e0] translate-y-[10px] translate-x-[10px]">
-              {groomLetters[2]}
-            </motion.span>
-          </div>
-        </div>
+        {/* Layer 2  */}
+        <svg
+          className="absolute bottom-0 w-full h-40 opacity-40 translate-y-2"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none">
+          <path fill="white" d="M0,50L1440,60L1440,120L0,120Z"></path>
+        </svg>
 
-        {/* Small Scroll Hint */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.5 }}
-          transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-[-80px] flex flex-col items-center gap-2">
-          <div className="w-px h-12 bg-gradient-to-b from-transparent to-[#d4c5b5]" />
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#c8b8a8]">
-            Scroll
-          </span>
-        </motion.div>
-      </motion.div>
+        {/* Layer 3 */}
+        <svg
+          className="relative block w-full h-40 opacity-60"
+          viewBox="0 0 1440 100"
+          preserveAspectRatio="none">
+          <path fill="white" d="M0,80L1440,70L1440,100L0,100Z"></path>
+        </svg>
+      </div>
     </section>
   );
 }
