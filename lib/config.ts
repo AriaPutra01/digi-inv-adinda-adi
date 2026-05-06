@@ -3,7 +3,7 @@ export const weddingConfig = {
     name: "Adinda",
     fullName: "Adinda Alfianty Fatrisini",
     position: "Putri ke-1",
-    fatherName: "Hj. Ritno Supriyadi",
+    fatherName: "H. Ritno Supriyadi",
     motherName: "Enung Camirah",
   },
   groom: {
