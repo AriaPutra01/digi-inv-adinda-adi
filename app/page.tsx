@@ -8,6 +8,7 @@ import Gallery from "@/components/Gallery";
 import WeddingGift from "@/components/WeddingGift";
 import Closing from "@/components/Closing";
 import DressCode from "@/components/DressCode";
+import LoveStory from "@/components/LoveStory";
 import FloatingNav from "@/components/FloatingNav";
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
       <ArRumSection />
       <Profiles />
       <WeddingDetails />
+      <LoveStory />
       <DressCode />
       <OurJourney />
       <Gallery />
