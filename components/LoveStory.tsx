@@ -57,14 +57,6 @@ export default function LoveStory() {
               className="object-cover scale-110"
             />
           </motion.div>
-          {/* Script Text Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end justify-center pb-12">
-            <h3
-              className="text-4xl md:text-5xl font-script text-white"
-              style={{ fontFamily: "var(--font-dancing)" }}>
-              Perkenalan
-            </h3>
-          </div>
         </motion.div>
 
         {/* Content from openingLetter */}
