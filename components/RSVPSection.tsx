@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { weddingConfig } from "@/lib/config";
 import { MessageCircle, Send } from "lucide-react";
 
@@ -10,6 +10,13 @@ export default function RSVPSection() {
   const { whatsapp, photos } = weddingConfig;
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
 
   const handleSendWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,16 +31,21 @@ export default function RSVPSection() {
   };
 
   return (
-    <section id="rsvp" className="relative py-24 px-6 overflow-hidden min-h-[600px] flex items-center justify-center">
+    <section
+      id="rsvp"
+      ref={containerRef}
+      className="relative py-24 px-6 overflow-hidden min-h-[600px] flex items-center justify-center">
       {/* Background Image with Dark Overlay */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src={photos[6] || photos[0]}
-          alt="RSVP Background"
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/70 backdrop-blur-[2px]" />
+        <motion.div style={{ y: backgroundY }} className="absolute inset-0">
+          <Image
+            src={photos[6] || photos[0]}
+            alt="RSVP Background"
+            fill
+            className="object-cover scale-110"
+          />
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-[2px]" />
+        </motion.div>
       </div>
 
       <motion.div

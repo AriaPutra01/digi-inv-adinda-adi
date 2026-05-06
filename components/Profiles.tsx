@@ -1,8 +1,19 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
+import { useRef } from "react";
 import { weddingConfig } from "@/lib/config";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+} as const;
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -15,28 +26,41 @@ const itemVariants = {
 
 export default function Profiles() {
   const { bride, groom, photos } = weddingConfig;
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const photoScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.1, 1]);
 
   return (
     <section
       id="profiles"
+      ref={containerRef}
       className="relative flex flex-col items-center bg-white px-6 py-20 overflow-hidden">
-      <div className="relative z-10 w-full max-w-xl flex flex-col items-center text-center">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="relative z-10 w-full max-w-xl flex flex-col items-center text-center">
         {/* Bride Profile */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="w-full flex flex-col items-center mb-20">
+        <motion.div className="w-full flex flex-col items-center mb-20">
           {/* Photo */}
           <motion.div
             variants={itemVariants}
             className="relative w-full aspect-[4/5] max-w-[320px] rounded-[30px] overflow-hidden shadow-xl mb-10">
-            <Image
-              src={photos[1]} // Using photo from config
-              alt={bride.fullName}
-              fill
-              className="object-cover"
-            />
+            <motion.div
+              style={{ scale: photoScale }}
+              className="absolute inset-0">
+              <Image
+                src={photos[1]} // Using photo from config
+                alt={bride.fullName}
+                fill
+                className="object-cover"
+              />
+            </motion.div>
           </motion.div>
 
           {/* Nickname */}
@@ -111,7 +135,7 @@ export default function Profiles() {
             {groom.motherName}
           </motion.p>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

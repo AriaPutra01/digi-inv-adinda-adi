@@ -1,14 +1,21 @@
 "use client";
 
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { weddingConfig } from "@/lib/config";
 import { Camera, Heart } from "lucide-react";
 
 export default function Closing() {
   const { bride, groom, photos } = weddingConfig;
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,16 +27,18 @@ export default function Closing() {
   return (
     <section
       id="closing"
+      ref={containerRef}
       className="relative min-h-screen flex flex-col items-center justify-center text-center px-8 overflow-hidden">
       {/* Background Slideshow (Seamless transition) */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPhotoIndex}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 2 }}
+            style={{ y: backgroundY }}
             className="absolute inset-0">
             <Image
               src={photos[currentPhotoIndex]}

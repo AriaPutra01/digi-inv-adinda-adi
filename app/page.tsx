@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "motion/react";
 import Cover from "@/components/Cover";
 import Hero from "@/components/Hero";
 import ArRumSection from "@/components/ArRumSection";
@@ -10,9 +13,23 @@ import LoveStory from "@/components/LoveStory";
 import RSVPSection from "@/components/RSVPSection";
 import FloatingNav from "@/components/FloatingNav";
 
+const pageVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+};
+
 export default function Home() {
   return (
-    <main className="invitation-wrapper flex flex-col w-full relative">
+    <motion.main
+      initial="hidden"
+      animate="visible"
+      variants={pageVariants}
+      className="invitation-wrapper flex flex-col w-full relative">
       <Cover />
       <Hero />
       <ArRumSection />
@@ -24,6 +41,6 @@ export default function Home() {
       <WeddingGift />
       <Closing />
       <FloatingNav />
-    </main>
+    </motion.main>
   );
 }

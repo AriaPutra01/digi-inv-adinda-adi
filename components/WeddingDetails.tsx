@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { weddingConfig } from "@/lib/config";
 import { Calendar, MapPin } from "lucide-react";
 
@@ -65,21 +65,31 @@ function Countdown() {
 
 export default function WeddingDetails() {
   const { akad, resepsi, photos, calendarUrl } = weddingConfig;
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
     <section
       id="details"
+      ref={containerRef}
       className="relative flex flex-col items-center px-6 py-20 overflow-hidden">
       
       {/* Background Image with Dark Overlay */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src={photos[0]}
-          alt="Background"
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/80" />
+        <motion.div style={{ y: backgroundY }} className="absolute inset-0">
+          <Image
+            src={photos[0]}
+            alt="Background"
+            fill
+            className="object-cover scale-110"
+          />
+          <div className="absolute inset-0 bg-black/80" />
+        </motion.div>
       </div>
       {/* Save The Date Content */}
       <motion.div

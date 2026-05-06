@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
+import { useRef } from "react";
 import { weddingConfig } from "@/lib/config";
 
 const itemVariants = {
@@ -15,10 +16,18 @@ const itemVariants = {
 
 export default function LoveStory() {
   const { openingLetter, photos } = weddingConfig;
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
     <section
       id="love-story"
+      ref={containerRef}
       className="relative bg-white py-24 px-6 overflow-hidden">
       <div className="max-w-xl mx-auto flex flex-col items-center text-center">
         {/* Title */}
@@ -40,12 +49,14 @@ export default function LoveStory() {
           viewport={{ once: true }}
           variants={itemVariants}
           className="relative w-full aspect-[3/4] max-w-[340px] rounded-[20px] overflow-hidden shadow-2xl mb-10">
-          <Image
-            src={photos[6]}
-            alt="Love Story"
-            fill
-            className="object-cover"
-          />
+          <motion.div style={{ y: imageY }} className="absolute inset-0">
+            <Image
+              src={photos[6]}
+              alt="Love Story"
+              fill
+              className="object-cover scale-110"
+            />
+          </motion.div>
           {/* Script Text Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end justify-center pb-12">
             <h3
