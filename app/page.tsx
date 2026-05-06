@@ -7,6 +7,7 @@ import Gallery from "@/components/Gallery";
 import WeddingGift from "@/components/WeddingGift";
 import Closing from "@/components/Closing";
 import LoveStory from "@/components/LoveStory";
+import RSVPSection from "@/components/RSVPSection";
 import FloatingNav from "@/components/FloatingNav";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <WeddingDetails />
       <LoveStory />
       <Gallery />
+      <RSVPSection />
       <WeddingGift />
       <Closing />
       <FloatingNav />

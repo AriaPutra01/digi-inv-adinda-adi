@@ -68,4 +68,5 @@ export const weddingConfig = {
       accountHolder: "Adi Saputra",
     },
   ],
+  whatsapp: "6281234567890", // Ganti dengan nomor WhatsApp tujuan
 } as const;
