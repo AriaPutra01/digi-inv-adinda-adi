@@ -4,14 +4,6 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import { weddingConfig } from "@/lib/config";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.3 },
-  },
-} as const;
-
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -25,65 +17,52 @@ export default function ArRumSection() {
   const { photos } = weddingConfig;
 
   return (
-    <motion.section
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      className="relative flex flex-col items-center justify-center bg-[#1a0a08] px-8 py-20 overflow-hidden">
-      {/* Floral Accent (Left side) */}
-      <div className="absolute top-[10%] left-[-40px] w-56 h-72 opacity-15 pointer-events-none">
-        <Image
-          src="/lineart.png"
-          alt="Flower Accent"
-          fill
-          className="object-contain"
-        />
-      </div>
-
-      {/* Verse Text */}
+    <section className="relative flex flex-col items-center justify-center bg-white px-6 py-10 overflow-hidden">
       <motion.div
-        variants={itemVariants}
-        className="max-w-xl text-center mb-10 z-10 px-4">
-        <p
-          className="text-base md:text-lg leading-relaxed text-[#f0e8e0] mb-8 italic"
-          style={{ fontFamily: "var(--font-cormorant)" }}>
-          &quot;Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="max-w-xl w-full flex flex-col items-center text-center z-10">
+        {/* Title */}
+        <motion.h2
+          variants={itemVariants}
+          className="text-lg md:text-xl font-serif font-bold text-gray-800 mb-8">
+          QS. Ar-Rum Ayat 21
+        </motion.h2>
+
+        {/* Arabic Text */}
+        <motion.p
+          variants={itemVariants}
+          className="text-2xl md:text-3xl text-gray-800 mb-8 leading-loose font-serif"
+          dir="rtl">
+          وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا
+          لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةً
+          ۗاِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ
+        </motion.p>
+
+        {/* Translation */}
+        <motion.p
+          variants={itemVariants}
+          className="text-sm md:text-base text-gray-600 font-serif leading-relaxed mb-12 italic px-4">
+          Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan
           pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung
           dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa
-          kasih dan sayang.&quot;
-        </p>
-        <p
-          className="text-xs tracking-[0.3em] uppercase text-[#c9a96e] font-bold"
-          style={{ fontFamily: "var(--font-montserrat)" }}>
-          QS. Ar-Rum : 21
-        </p>
-      </motion.div>
+          kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat
+          tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.
+        </motion.p>
 
-      {/* Vertical Container for the Frame and Photo */}
-      <motion.div
-        variants={itemVariants}
-        className="relative z-10 w-full max-w-[380px] aspect-3/4 flex items-center justify-center">
-        {/* 1. The frame/card (Bottom Layer) */}
-        <div className="absolute inset-0 z-0">
+        {/* Couple Photo */}
+        <motion.div
+          variants={itemVariants}
+          className="relative w-full aspect-[4/5] max-w-[340px] rounded-[40px] overflow-hidden shadow-2xl">
           <Image
-            src="/cover.png"
-            alt="Frame Cover"
+            src={photos[1] || photos[0]} // Using a different photo if available
+            alt="Couple Photo"
             fill
-            className="object-contain rotate-90"
+            className="object-cover"
           />
-        </div>
-
-        {/* 2. The actual photo (Top Layer - Sized to fit inside the lace area) */}
-        <div className="relative z-10 w-[48%] h-[50%] overflow-hidden rounded-sm shadow-md bg-[#2a1208] mt-[-5%]">
-          <Image
-            src={photos[0]}
-            alt="Wedding Photo"
-            fill
-            className="object-cover grayscale brightness-95"
-          />
-        </div>
+        </motion.div>
       </motion.div>
-    </motion.section>
+    </section>
   );
 }

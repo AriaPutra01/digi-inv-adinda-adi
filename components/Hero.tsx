@@ -44,9 +44,7 @@ export default function Hero() {
       </div>
 
       {/* Content Layout - Right Aligned */}
-      <div
-        className="relative z-10 text-right text-white max-w-xs md:max-w-md"
-        style={{ padding: "0px 20px" }}>
+      <div className="relative z-10 text-right text-white max-w-xs md:max-w-md px-5">
         <motion.p
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
