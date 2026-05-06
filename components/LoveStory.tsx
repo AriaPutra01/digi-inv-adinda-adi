@@ -41,7 +41,7 @@ export default function LoveStory() {
           variants={itemVariants}
           className="relative w-full aspect-[3/4] max-w-[340px] rounded-[20px] overflow-hidden shadow-2xl mb-10">
           <Image
-            src={photos[5] || photos[0]}
+            src={photos[6]}
             alt="Love Story"
             fill
             className="object-cover"

@@ -54,15 +54,15 @@ export const weddingConfig = {
     "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+Adinda+%26+Adi&dates=20260628T020000Z/20260628T060000Z&details=Akad+%26+Resepsi+Pernikahan+Adinda+%26+Adi&location=Mega+Regency+Blok+D60%2F08,+Sukaragam,+Serang+Baru,+Bekasi",
   gifts: [
     {
-      bankName: "MANDIRI",
-      accountNumber: "1234567890",
-      accountHolder: "Adinda Alfianty Fatrisini",
+      bankName: "BCA",
+      accountNumber: "6880339476",
+      accountHolder: "Adinda",
     },
     {
       bankName: "BCA",
-      accountNumber: "0987654321",
-      accountHolder: "Adi Saputra",
+      accountNumber: "3780858841 ",
+      accountHolder: "Adi",
     },
   ],
-  whatsapp: "6281234567890", // Ganti dengan nomor WhatsApp tujuan
+  whatsapp: "6282114419026",
 } as const;

@@ -19,7 +19,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-end justify-center overflow-hidden pr-8 md:pr-16">
+      className="relative min-h-screen flex flex-col items-end justify-center overflow-hidden px-6">
       {/* Background Slideshow */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
@@ -44,7 +44,7 @@ export default function Hero() {
       </div>
 
       {/* Content Layout - Right Aligned */}
-      <div className="relative z-10 text-right text-white max-w-xs md:max-w-md px-5">
+      <div className="relative z-10 text-right text-white max-w-xs md:max-w-md">
         <motion.p
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}

@@ -74,7 +74,7 @@ export default function WeddingDetails() {
       {/* Background Image with Dark Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
-          src={photos[4] || photos[0]}
+          src={photos[0]}
           alt="Background"
           fill
           className="object-cover"
@@ -106,7 +106,7 @@ export default function WeddingDetails() {
         {/* Big Photo with Rounded Corners */}
         <div className="relative w-full aspect-[4/5] max-w-[340px] rounded-[30px] overflow-hidden shadow-2xl">
           <Image
-            src={photos[4] || photos[0]}
+            src={photos[0]}
             alt="Engagement Photo"
             fill
             className="object-cover"

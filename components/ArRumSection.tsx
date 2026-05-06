@@ -56,7 +56,7 @@ export default function ArRumSection() {
           variants={itemVariants}
           className="relative w-full aspect-[4/5] max-w-[340px] rounded-[40px] overflow-hidden shadow-2xl">
           <Image
-            src={photos[1] || photos[0]} // Using a different photo if available
+            src={photos[1]} // Using a different photo if available
             alt="Couple Photo"
             fill
             className="object-cover"

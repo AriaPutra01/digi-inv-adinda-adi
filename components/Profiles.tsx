@@ -3,7 +3,6 @@
 import { motion } from "motion/react";
 import Image from "next/image";
 import { weddingConfig } from "@/lib/config";
-import { Camera } from "lucide-react";
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -33,7 +32,7 @@ export default function Profiles() {
             variants={itemVariants}
             className="relative w-full aspect-[4/5] max-w-[320px] rounded-[30px] overflow-hidden shadow-xl mb-10">
             <Image
-              src={photos[2] || photos[0]} // Using photo from config
+              src={photos[1]} // Using photo from config
               alt={bride.fullName}
               fill
               className="object-cover"
@@ -61,16 +60,6 @@ export default function Profiles() {
             {bride.position} dari Bapak {bride.fatherName} dan Ibu{" "}
             {bride.motherName}
           </motion.p>
-
-          {/* Instagram Button */}
-          <motion.a
-            variants={itemVariants}
-            href={`https://instagram.com/`}
-            target="_blank"
-            className="flex items-center gap-2 px-6 py-2 bg-[#1b3d2b] text-white rounded-xl shadow-md hover:opacity-90 transition-all">
-            <Camera size={18} />
-            <span className="text-sm font-sans">Instagram</span>
-          </motion.a>
         </motion.div>
 
         {/* Ampersand */}
@@ -93,7 +82,7 @@ export default function Profiles() {
             variants={itemVariants}
             className="relative w-full aspect-[4/5] max-w-[320px] rounded-[30px] overflow-hidden shadow-xl mb-10">
             <Image
-              src={photos[3] || photos[0]} // Using photo from config
+              src={photos[1]} // Using photo from config
               alt={groom.fullName}
               fill
               className="object-cover"
@@ -121,16 +110,6 @@ export default function Profiles() {
             {groom.position} dari Bapak {groom.fatherName} dan Ibu{" "}
             {groom.motherName}
           </motion.p>
-
-          {/* Instagram Button */}
-          <motion.a
-            variants={itemVariants}
-            href={`https://instagram.com/`}
-            target="_blank"
-            className="flex items-center gap-2 px-6 py-2 bg-[#1b3d2b] text-white rounded-xl shadow-md hover:opacity-90 transition-all">
-            <Camera size={18} />
-            <span className="text-sm font-sans">Instagram</span>
-          </motion.a>
         </motion.div>
       </div>
     </section>
