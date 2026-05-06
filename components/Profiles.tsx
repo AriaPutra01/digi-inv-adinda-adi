@@ -44,25 +44,9 @@ export default function Profiles() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className="relative z-10 w-full max-w-xl flex flex-col items-center text-center">
+        className="relative z-10 w-full max-w-xl flex flex-col gap-10 items-center text-center">
         {/* Bride Profile */}
-        <motion.div className="w-full flex flex-col items-center mb-20">
-          {/* Photo */}
-          <motion.div
-            variants={itemVariants}
-            className="relative w-full aspect-[4/5] max-w-[320px] rounded-[30px] overflow-hidden shadow-xl mb-10">
-            <motion.div
-              style={{ scale: photoScale }}
-              className="absolute inset-0">
-              <Image
-                src={photos[1]} // Using photo from config
-                alt={bride.fullName}
-                fill
-                className="object-cover"
-              />
-            </motion.div>
-          </motion.div>
-
+        <motion.div className="w-full flex flex-col items-center">
           {/* Nickname */}
           <motion.h3
             variants={itemVariants}
@@ -91,7 +75,7 @@ export default function Profiles() {
           initial={{ opacity: 0, scale: 0.5 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="text-7xl md:text-8xl font-serif text-gray-400 mb-20 select-none italic">
+          className="text-7xl md:text-8xl font-serif text-gray-400 select-none italic">
           &
         </motion.div>
 
@@ -101,18 +85,6 @@ export default function Profiles() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           className="w-full flex flex-col items-center">
-          {/* Photo */}
-          <motion.div
-            variants={itemVariants}
-            className="relative w-full aspect-[4/5] max-w-[320px] rounded-[30px] overflow-hidden shadow-xl mb-10">
-            <Image
-              src={photos[1]} // Using photo from config
-              alt={groom.fullName}
-              fill
-              className="object-cover"
-            />
-          </motion.div>
-
           {/* Nickname */}
           <motion.h3
             variants={itemVariants}
