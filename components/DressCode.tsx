@@ -3,14 +3,6 @@
 import { motion } from "motion/react";
 import { weddingConfig } from "@/lib/config";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2 },
-  },
-} as const;
-
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -24,35 +16,24 @@ export default function DressCode() {
   const { dressCode } = weddingConfig;
 
   return (
-    <motion.section
+    <section
       id="dress-code"
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.5 }}
-      className="py-24 px-8 bg-[#1a0a08] text-center flex flex-col items-center justify-center min-h-[40vh]"
-    >
-      <motion.h2
-        variants={itemVariants}
-        className="text-4xl md:text-5xl italic mb-6 text-[#f0e8e0]"
-        style={{ fontFamily: "var(--font-cormorant)" }}
-      >
-        Dress Code
-      </motion.h2>
-      
-      <motion.p
-        variants={itemVariants}
-        className="max-w-md text-sm md:text-base leading-relaxed text-[#c8b8a8] font-light italic"
-        style={{ fontFamily: "var(--font-montserrat)" }}
-      >
-        {dressCode}
-      </motion.p>
-
-      {/* Subtle Divider at bottom */}
-      <motion.div 
-        variants={itemVariants}
-        className="mt-12 w-12 h-px bg-[#d4c5b5] opacity-30"
-      />
-    </motion.section>
+      className="relative bg-white py-24 px-6 overflow-hidden">
+      <div className="max-w-xl mx-auto flex flex-col items-center text-center">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={itemVariants}>
+          <h2 className="text-4xl md:text-5xl font-serif text-gray-800 mb-6">
+            Dress Code
+          </h2>
+          <div className="w-12 h-px bg-[#1b3d2b] mx-auto opacity-50 mb-8" />
+          <p className="text-sm md:text-base text-gray-600 font-serif leading-relaxed italic">
+            {dressCode}
+          </p>
+        </motion.div>
+      </div>
+    </section>
   );
 }

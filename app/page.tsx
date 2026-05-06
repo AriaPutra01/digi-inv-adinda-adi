@@ -3,10 +3,8 @@ import Hero from "@/components/Hero";
 import ArRumSection from "@/components/ArRumSection";
 import Profiles from "@/components/Profiles";
 import WeddingDetails from "@/components/WeddingDetails";
-import LocationSection from "@/components/LocationSection";
 import OurJourney from "@/components/OurJourney";
 import Gallery from "@/components/Gallery";
-import GalleryGrid from "@/components/GalleryGrid";
 import WeddingGift from "@/components/WeddingGift";
 import Closing from "@/components/Closing";
 import DressCode from "@/components/DressCode";
@@ -20,11 +18,9 @@ export default function Home() {
       <ArRumSection />
       <Profiles />
       <WeddingDetails />
-      <LocationSection />
       <DressCode />
-      <Gallery />
       <OurJourney />
-      <GalleryGrid />
+      <Gallery />
       <WeddingGift />
       <Closing />
       <FloatingNav />

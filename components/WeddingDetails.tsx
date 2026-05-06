@@ -2,130 +2,182 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 import { weddingConfig } from "@/lib/config";
+import { Calendar, MapPin } from "lucide-react";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2 },
-  },
-} as const;
+function Countdown() {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: "easeOut" },
-  },
-} as const;
+  useEffect(() => {
+    // Target date from config: Minggu, 28 Juni 2026
+    const targetDate = new Date("2026-06-28T09:00:00").getTime();
 
-export default function WeddingDetails() {
-  const { akad, resepsi } = weddingConfig;
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        clearInterval(interval);
+        return;
+      }
+
+      setTimeLeft({
+        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+        hours: Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        ),
+        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((distance % (1000 * 60)) / 1000),
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const timeUnits = [
+    { label: "Hari", value: timeLeft.days },
+    { label: "Jam", value: timeLeft.hours },
+    { label: "Menit", value: timeLeft.minutes },
+    { label: "Detik", value: timeLeft.seconds },
+  ];
 
   return (
-    <motion.section
-      id="details"
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      className="min-h-[70vh] relative flex flex-col items-center justify-start gap-8 bg-[#1a0a08] px-8 py-20 overflow-hidden">
-      {/* Floral Accent (Right side) */}
-      <div className="absolute top-[10%] right-[-40px] w-56 h-72 opacity-15 pointer-events-none rotate-12">
-        <Image
-          src="/lineart.png"
-          alt="Flower Accent"
-          fill
-          className="object-contain"
-        />
-      </div>
-
-      {/* Date Header Layout */}
-      <motion.div
-        variants={itemVariants}
-        className="flex flex-col items-center mb-16 z-10">
-        <p
-          className="text-xs md:text-sm tracking-[0.4em] uppercase mb-6 text-[#c8b8a8]"
-          style={{ fontFamily: "var(--font-montserrat)" }}>
-          SUNDAY
-        </p>
-        <div className="flex items-center gap-6 md:gap-12">
-          <span
-            className="text-sm md:text-base tracking-[0.2em] uppercase text-[#c8b8a8]"
-            style={{ fontFamily: "var(--font-montserrat)" }}>
-            JUNE
+    <div className="flex gap-4 md:gap-8 mb-10">
+      {timeUnits.map((unit, index) => (
+        <div key={index} className="flex flex-col items-center">
+          <span className="text-3xl md:text-4xl font-serif text-white">
+            {String(unit.value).padStart(2, "0")}
           </span>
-          <span
-            className="text-7xl md:text-9xl font-serif text-[#f0e8e0]"
-            style={{ fontFamily: "var(--font-cormorant)" }}>
-            28
-          </span>
-          <span
-            className="text-sm md:text-base tracking-[0.2em] uppercase text-[#c8b8a8]"
-            style={{ fontFamily: "var(--font-montserrat)" }}>
-            2026
+          <span className="text-xs md:text-sm font-sans text-gray-300 uppercase tracking-widest mt-1">
+            {unit.label}
           </span>
         </div>
-      </motion.div>
+      ))}
+    </div>
+  );
+}
 
-      {/* Event Details Card with cover.png (Horizontal) */}
+export default function WeddingDetails() {
+  const { akad, resepsi, photos, calendarUrl } = weddingConfig;
+
+  return (
+    <section
+      id="details"
+      className="relative flex flex-col items-center px-6 py-20 overflow-hidden">
+      
+      {/* Background Image with Dark Overlay */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={photos[4] || photos[0]}
+          alt="Background"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/80" />
+      </div>
+      {/* Save The Date Content */}
       <motion.div
-        variants={itemVariants}
-        className="relative z-10 w-full max-w-[360px] md:max-w-[450px] aspect-video flex items-center justify-center">
-        {/* Background Card (cover.png - Horizontal) */}
-        <div className="absolute inset-0 z-0">
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="relative z-10 w-full max-w-xl flex flex-col items-center text-center mb-20">
+        <h2 className="text-4xl md:text-5xl font-serif text-white mb-10">
+          Save The Date
+        </h2>
+
+        <Countdown />
+
+        <motion.a
+          href={calendarUrl}
+          target="_blank"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="flex items-center gap-2 px-6 py-2.5 bg-[#1b3d2b] text-white rounded-xl border border-white/40 shadow-lg mb-16 transition-all">
+          <Calendar size={18} />
+          <span className="text-sm font-sans">Save The Date</span>
+        </motion.a>
+
+        {/* Big Photo with Rounded Corners */}
+        <div className="relative w-full aspect-[4/5] max-w-[340px] rounded-[30px] overflow-hidden shadow-2xl">
           <Image
-            src="/cover.png"
-            alt="Card Background"
+            src={photos[4] || photos[0]}
+            alt="Engagement Photo"
             fill
-            className="object-contain"
+            className="object-cover"
           />
         </div>
+      </motion.div>
 
-        {/* Content on Top of Card - Compact Layout */}
-        <div className="relative z-10 flex flex-col items-center gap-2 py-4 px-8 text-center">
-          {/* Akad Nikah */}
-          <div className="flex flex-col items-center gap-1">
-            <h3
-              className="text-lg font-serif text-[#1a0a08]"
-              style={{ fontFamily: "var(--font-cormorant)" }}>
-              Akad Nikah
-            </h3>
-            <p
-              className="text-xs font-medium text-[#632a26]"
-              style={{ fontFamily: "var(--font-montserrat)" }}>
-              {akad.time}
+      {/* Event Details Section (Akad & Resepsi) */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="relative z-10 w-full max-w-xl bg-black/40 backdrop-blur-sm rounded-[40px] p-8 md:p-12 border border-white/10 shadow-2xl text-center flex flex-col items-center gap-16">
+        {/* Akad Nikah */}
+        <div className="flex flex-col items-center w-full">
+          <h3 className="text-4xl md:text-5xl font-serif text-white mb-8">
+            Akad Nikah
+          </h3>
+
+          <div className="flex flex-col items-center gap-2 text-gray-300 font-serif mb-8">
+            <p className="text-lg">{akad.date}</p>
+            <p className="text-base">Pukul {akad.time}</p>
+            <p className="text-sm tracking-widest uppercase mt-4 mb-2 text-white">
+              Bertempat di:
+            </p>
+            <p className="text-lg font-bold text-white">{akad.venue}</p>
+            <p className="text-sm max-w-[250px] leading-relaxed">
+              {akad.address}
             </p>
           </div>
 
-          {/* Divider Icon */}
-          <div className="text-[#c9a96e] opacity-40 text-sm">✦</div>
+          <motion.a
+            href={akad.mapsUrl}
+            target="_blank"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-2 px-6 py-2 bg-[#1b3d2b] text-white rounded-full shadow-md hover:bg-[#234d36] transition-all">
+            <MapPin size={16} />
+            <span className="text-sm font-sans font-medium">Google Maps</span>
+          </motion.a>
+        </div>
 
-          {/* Resepsi */}
-          <div className="flex flex-col items-center gap-1">
-            <h3
-              className="text-lg font-serif text-[#1a0a08]"
-              style={{ fontFamily: "var(--font-cormorant)" }}>
-              Resepsi Pernikahan
-            </h3>
-            <p
-              className="text-xs font-medium text-[#632a26]"
-              style={{ fontFamily: "var(--font-montserrat)" }}>
-              {resepsi.time}
+        {/* Resepsi */}
+        <div className="flex flex-col items-center w-full">
+          <h3 className="text-4xl md:text-5xl font-serif text-white mb-8">
+            Resepsi
+          </h3>
+
+          <div className="flex flex-col items-center gap-2 text-gray-300 font-serif mb-8">
+            <p className="text-lg">{resepsi.date}</p>
+            <p className="text-base">Pukul {resepsi.time}</p>
+            <p className="text-sm tracking-widest uppercase mt-4 mb-2 text-white">
+              Bertempat di:
+            </p>
+            <p className="text-lg font-bold text-white">{resepsi.venue}</p>
+            <p className="text-sm max-w-[250px] leading-relaxed">
+              {resepsi.address}
             </p>
           </div>
 
-          {/* Location Hint */}
-          <div className="mt-2">
-            <div className="w-8 h-[1px] bg-[#1a0a08]/10 mx-auto mb-1" />
-            <p className="text-[9px] tracking-widest text-[#1a0a08]/60 uppercase">
-              Kediaman Mempelai Wanita
-            </p>
-          </div>
+          <motion.a
+            href={resepsi.mapsUrl}
+            target="_blank"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-2 px-6 py-2 bg-[#1b3d2b] text-white rounded-full shadow-md hover:bg-[#234d36] transition-all">
+            <MapPin size={16} />
+            <span className="text-sm font-sans font-medium">Google Maps</span>
+          </motion.a>
         </div>
       </motion.div>
-    </motion.section>
+    </section>
   );
 }
