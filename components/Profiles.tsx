@@ -45,6 +45,40 @@ export default function Profiles() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         className="relative z-10 w-full max-w-xl flex flex-col gap-10 items-center text-center">
+        {/* Groom Profile */}
+        <motion.div className="w-full flex flex-col items-center">
+          {/* Nickname */}
+          <motion.h3
+            variants={itemVariants}
+            className="text-5xl md:text-6xl font-script text-gray-800 mb-2">
+            {groom.name}
+          </motion.h3>
+
+          {/* Full Name */}
+          <motion.h2
+            variants={itemVariants}
+            className="text-3xl md:text-4xl font-serif text-gray-800 mb-4 px-4">
+            {groom.fullName}
+          </motion.h2>
+
+          {/* Description */}
+          <motion.p
+            variants={itemVariants}
+            className="text-sm md:text-base text-gray-600 font-serif mb-8 px-6">
+            {groom.position} dari Bapak {groom.fatherName} dan Ibu{" "}
+            {groom.motherName}
+          </motion.p>
+        </motion.div>
+
+        {/* Ampersand */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="text-7xl md:text-8xl font-serif text-gray-400 select-none italic">
+          &
+        </motion.div>
+
         {/* Bride Profile */}
         <motion.div className="w-full flex flex-col items-center">
           {/* Nickname */}
@@ -67,44 +101,6 @@ export default function Profiles() {
             className="text-sm md:text-base text-gray-600 font-serif mb-8 px-6">
             {bride.position} dari Bapak {bride.fatherName} dan Ibu{" "}
             {bride.motherName}
-          </motion.p>
-        </motion.div>
-
-        {/* Ampersand */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="text-7xl md:text-8xl font-serif text-gray-400 select-none italic">
-          &
-        </motion.div>
-
-        {/* Groom Profile */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="w-full flex flex-col items-center">
-          {/* Nickname */}
-          <motion.h3
-            variants={itemVariants}
-            className="text-5xl md:text-6xl font-script text-gray-800 mb-2">
-            {groom.name}
-          </motion.h3>
-
-          {/* Full Name */}
-          <motion.h2
-            variants={itemVariants}
-            className="text-3xl md:text-4xl font-serif text-gray-800 mb-4 px-4">
-            {groom.fullName}
-          </motion.h2>
-
-          {/* Description */}
-          <motion.p
-            variants={itemVariants}
-            className="text-sm md:text-base text-gray-600 font-serif mb-8 px-6">
-            {groom.position} dari Bapak {groom.fatherName} dan Ibu{" "}
-            {groom.motherName}
           </motion.p>
         </motion.div>
       </motion.div>

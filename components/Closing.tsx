@@ -69,7 +69,7 @@ export default function Closing() {
           <h2
             className="text-white text-5xl md:text-7xl font-script"
             style={{ fontFamily: "var(--font-dancing)" }}>
-            {bride.name} & {groom.name}
+            {groom.name} & {bride.name}
           </h2>
         </div>
 

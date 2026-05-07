@@ -51,17 +51,17 @@ export const weddingConfig = {
     "/photo8.jpeg",
   ],
   calendarUrl:
-    "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+Adinda+%26+Adi&dates=20260628T020000Z/20260628T060000Z&details=Akad+%26+Resepsi+Pernikahan+Adinda+%26+Adi&location=Mega+Regency+Blok+D60%2F08,+Sukaragam,+Serang+Baru,+Bekasi",
+    "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+Adi+%26+Adinda&dates=20260628T020000Z/20260628T060000Z&details=Akad+%26+Resepsi+Pernikahan+Adi+%26+Adinda&location=Mega+Regency+Blok+D60%2F08,+Sukaragam,+Serang+Baru,+Bekasi",
   gifts: [
-    {
-      bankName: "BCA",
-      accountNumber: "6880339476",
-      accountHolder: "Adinda",
-    },
     {
       bankName: "BCA",
       accountNumber: "3780858841 ",
       accountHolder: "Adi",
+    },
+    {
+      bankName: "BCA",
+      accountNumber: "6880339476",
+      accountHolder: "Adinda",
     },
   ],
   whatsapp: "6282114419026",
