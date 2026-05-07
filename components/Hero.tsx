@@ -7,6 +7,7 @@ import { weddingConfig } from "@/lib/config";
 
 export default function Hero() {
   const { bride, groom, photos, akad } = weddingConfig;
+  const selectedPhotos = [1, 2, 6, 0, 7].map((i) => photos[i]).filter(Boolean);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -18,10 +19,10 @@ export default function Hero() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentPhotoIndex((prev) => (prev + 1) % photos.length);
+      setCurrentPhotoIndex((prev) => (prev + 1) % selectedPhotos.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [photos.length]);
+  }, [selectedPhotos.length]);
 
   return (
     <section
@@ -40,7 +41,7 @@ export default function Hero() {
             style={{ y: backgroundY }}
             className="absolute inset-0">
             <Image
-              src={photos[currentPhotoIndex]}
+              src={selectedPhotos[currentPhotoIndex]}
               alt="Wedding Background"
               fill
               className="object-cover"
