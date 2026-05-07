@@ -1,7 +1,7 @@
 export const weddingConfig = {
   bride: {
     name: "Adinda",
-    fullName: "Adinda Alfianty Fatrisini",
+    fullName: "Adinda Alfianty F",
     position: "Putri ke-1",
     fatherName: "H. Ritno Supriyadi",
     motherName: "Enung Camirah",

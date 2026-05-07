@@ -65,11 +65,11 @@ function CoverContent() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.6, duration: 1 }}
                 className="text-white font-script text-6xl md:text-8xl mb-4 leading-tight drop-shadow-md">
-                {bride.name}{" "}
-                <span className="font-serif italic mx-1 text-4xl md:text-6xl">
+                {bride.fullName}
+                <p className="font-serif italic mx-1 text-4xl md:text-6xl">
                   &
-                </span>{" "}
-                {groom.name}
+                </p>
+                {groom.fullName}
               </motion.h1>
 
               <motion.p

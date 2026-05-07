@@ -67,16 +67,16 @@ export default function Hero() {
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-5xl md:text-7xl font-serif leading-none mb-2">
-          {bride.name}
+          className="text-4xl font-bold font-serif leading-none mb-2 text-nowrap">
+          {bride.fullName}
         </motion.h1>
 
         <motion.h1
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-5xl md:text-7xl font-serif leading-none mb-6">
-          {groom.name}
+          className="text-4xl font-bold font-serif leading-none mb-4 text-nowrap">
+          {groom.fullName}
         </motion.h1>
 
         <motion.p
