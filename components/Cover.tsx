@@ -40,7 +40,7 @@ function CoverContent() {
           {/* Background Image */}
           <div className="absolute inset-0 w-full h-full">
             <Image
-              src={photos[4]}
+              src={photos[2]}
               alt="Cover Image"
               fill
               className="object-cover opacity-60"
